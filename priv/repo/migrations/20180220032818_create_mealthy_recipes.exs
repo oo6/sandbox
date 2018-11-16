@@ -3,8 +3,8 @@ defmodule Sandbox.Repo.Migrations.CreateMealthyRecipes do
 
   def change do
     create table(:mealthy_recipes) do
-      add(:title, :string)
-      add(:description, :string)
+      add :title, :string
+      add :description, :string
 
       timestamps()
     end

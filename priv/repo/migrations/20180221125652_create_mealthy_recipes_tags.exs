@@ -3,8 +3,8 @@ defmodule Sandbox.Repo.Migrations.CreateMealthyRecipesTags do
 
   def change do
     create table(:mealthy_recipes_tags, primary_key: false) do
-      add(:recipe_id, references(:mealthy_recipes))
-      add(:tag_id, references(:mealthy_tags))
+      add :recipe_id, references(:mealthy_recipes)
+      add :tag_id, references(:mealthy_tags)
 
       timestamps()
     end

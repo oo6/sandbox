@@ -6,10 +6,10 @@ defmodule Sandbox.Venture.NPC do
   @behaviour Filter
 
   schema "venture_npcs" do
-    field(:name, :string)
-    field(:level, :integer, default: 0)
-    field(:tags, {:array, :string}, default: [])
-    field(:description, :string)
+    field :name, :string
+    field :level, :integer, default: 0
+    field :tags, {:array, :string}, default: []
+    field :description, :string
 
     timestamps()
   end

@@ -4,9 +4,9 @@ defmodule Sandbox.Mealthy.Tag do
   alias Sandbox.Mealthy.{Recipe, RecipeTag}
 
   schema "mealthy_tags" do
-    field(:name, :string)
+    field :name, :string
 
-    many_to_many(:recipes, Recipe, join_through: RecipeTag)
+    many_to_many :recipes, Recipe, join_through: RecipeTag
 
     timestamps()
   end

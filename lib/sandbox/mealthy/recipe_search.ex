@@ -2,7 +2,7 @@ defmodule Sandbox.Mealthy.RecipeSearch do
   import Ecto.Query
 
   def run(query, search_string) do
-    _run(query, normalize(search_string))
+    do_run(query, normalize(search_string))
   end
 
   defmacro matching_recipe_ids_and_ranks(search_string) do
@@ -24,9 +24,9 @@ defmodule Sandbox.Mealthy.RecipeSearch do
     end
   end
 
-  defp _run(query, ""), do: query
+  defp do_run(query, ""), do: query
 
-  defp _run(query, search_string) do
+  defp do_run(query, search_string) do
     from(
       r in query,
       join: id_and_rank in matching_recipe_ids_and_ranks(search_string),

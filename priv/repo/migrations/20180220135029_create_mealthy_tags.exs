@@ -3,7 +3,7 @@ defmodule Sandbox.Repo.Migrations.CreateMealthyTags do
 
   def change do
     create table(:mealthy_tags) do
-      add(:name, :string)
+      add :name, :string
 
       timestamps()
     end

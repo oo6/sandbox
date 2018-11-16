@@ -5,8 +5,8 @@ defmodule Sandbox.Mealthy.RecipeTag do
 
   @primary_key false
   schema "mealthy_recipes_tags" do
-    belongs_to(:recipe, Recipe)
-    belongs_to(:tag, Tag)
+    belongs_to :recipe, Recipe
+    belongs_to :tag, Tag
 
     timestamps()
   end

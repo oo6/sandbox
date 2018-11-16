@@ -1,6 +1,4 @@
 defmodule Sandbox.Vehicle.PhotoQuery do
-  import Ecto.Query
-
   defmacro photo_urls_have_a_null do
     quote do
       fragment("""

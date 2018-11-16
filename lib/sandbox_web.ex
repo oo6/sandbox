@@ -20,9 +20,10 @@ defmodule SandboxWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: SandboxWeb
+
       import Plug.Conn
-      import SandboxWeb.Router.Helpers
       import SandboxWeb.Gettext
+      alias SandboxWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -33,14 +34,14 @@ defmodule SandboxWeb do
         namespace: SandboxWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import SandboxWeb.Router.Helpers
       import SandboxWeb.ErrorHelpers
       import SandboxWeb.Gettext
+      alias SandboxWeb.Router.Helpers, as: Routes
     end
   end
 

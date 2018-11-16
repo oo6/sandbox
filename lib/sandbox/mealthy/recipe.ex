@@ -4,10 +4,10 @@ defmodule Sandbox.Mealthy.Recipe do
   alias Sandbox.Mealthy.{Tag, RecipeTag}
 
   schema "mealthy_recipes" do
-    field(:title, :string)
-    field(:description, :string)
+    field :title, :string
+    field :description, :string
 
-    many_to_many(:tags, Tag, join_through: RecipeTag)
+    many_to_many :tags, Tag, join_through: RecipeTag
 
     timestamps()
   end
