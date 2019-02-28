@@ -1,0 +1,9 @@
+<div data-controller="stimulus" data-stimulus-index="1" class="stimulus-slideshow">
+  <button data-action="stimulus#previous">←</button>
+  <button data-action="stimulus#next">→</button>
+
+  <div data-target="stimulus.slide" class="slide">🐵</div>
+  <div data-target="stimulus.slide" class="slide">🙈</div>
+  <div data-target="stimulus.slide" class="slide">🙉</div>
+  <div data-target="stimulus.slide" class="slide">🙊</div>
+</div>

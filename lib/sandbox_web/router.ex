@@ -17,6 +17,14 @@ defmodule SandboxWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    scope "/stimulus", as: :stimulus do
+      get "/hello", StimulusController, :hello
+      get "/clipboard", StimulusController, :clipboard
+      get "/slideshow", StimulusController, :slideshow
+      get "/content_loader", StimulusController, :content_loader
+      get "/date_time", StimulusController, :date_time
+    end
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,7 @@
+.stimulus-slideshow .slide {
+  display: none;
+}
+
+.stimulus-slideshow .slide--show {
+  display: block;
+}

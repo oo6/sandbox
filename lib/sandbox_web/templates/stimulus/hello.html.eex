@@ -1,0 +1,4 @@
+<div data-controller="stimulus">
+  <input type="text" data-target="stimulus.name">
+  <button data-action="stimulus#greet">Greet</button>
+</div>
