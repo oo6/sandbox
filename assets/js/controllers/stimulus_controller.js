@@ -9,7 +9,7 @@ export default class extends Controller {
 
   set index(value) {
     this.data.set("index", value)
-    this._showCurrentSlide()
+    this._show()
   }
 
   get length() {
