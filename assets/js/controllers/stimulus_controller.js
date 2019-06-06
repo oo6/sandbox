@@ -16,6 +16,10 @@ export default class extends Controller {
     return this.slideTargets.length
   }
 
+  get name() {
+    return this.nameTarget.value
+  }
+
   initialize() {
     if (location.pathname == "/stimulus/slideshow") {
       this._show()
