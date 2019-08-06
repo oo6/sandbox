@@ -27,13 +27,13 @@ export default class extends Controller {
   }
 
   connect() {
-    if (location.pathname == "/stimulus/content_loader") {
+    if (location.pathname == "/stimulus/content_loader_vs_live_view") {
       this._start()
     }
   }
 
   disconnect() {
-    if (location.pathname == "/stimulus/content_loader") {
+    if (location.pathname == "/stimulus/content_loader_vs_live_view") {
       this._stop()
     }
   }
@@ -53,10 +53,8 @@ export default class extends Controller {
   }
 
   _start() {
-    this._load()
-
-    if (this.data.has("interval")) {
-      this.timer = setInterval(() => this._load(), this.data.get("interval"))
+    if (this.data.has("url")) {
+      this.timer = setInterval(() => this._load(), 1000)
     }
   }
 
@@ -76,12 +74,22 @@ export default class extends Controller {
   }
 
   next() {
-    const index = this.index + 1;
+    const index = this.index + 1
     this.index = index == this.length ? 0 : index
   }
 
   previous() {
-    const index = this.index - 1;
+    const index = this.index - 1
     this.index = index == -1 ? this.length - 1 : index
+  }
+
+  adjust() {
+    const body = this.element.contentDocument.querySelector("body")
+
+    body.style.margin = 0
+    body.querySelector("header").style.display = "none"
+    body.querySelector("main").style.padding = 0
+
+    this.element.classList.remove("stimulus-live-view--hide")
   }
 }

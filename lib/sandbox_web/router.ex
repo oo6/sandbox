@@ -5,6 +5,7 @@ defmodule SandboxWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -24,7 +25,8 @@ defmodule SandboxWeb.Router do
       get "/hello", StimulusController, :hello
       get "/clipboard", StimulusController, :clipboard
       get "/slideshow", StimulusController, :slideshow
-      get "/content_loader", StimulusController, :content_loader
+      get "/content_loader_vs_live_view", StimulusController, :content_loader_vs_live_view
+      live "/live_view", StimulusLive
       get "/date_time", StimulusController, :date_time
     end
 

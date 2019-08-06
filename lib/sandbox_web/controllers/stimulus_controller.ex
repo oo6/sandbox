@@ -13,8 +13,8 @@ defmodule SandboxWeb.StimulusController do
     render(conn, "slideshow.html")
   end
 
-  def content_loader(conn, _params) do
-    render(conn, "content_loader.html")
+  def content_loader_vs_live_view(conn, _params) do
+    render(conn, "content_loader_vs_live_view.html", content_loader: DateTime.utc_now())
   end
 
   def date_time(conn, _params) do

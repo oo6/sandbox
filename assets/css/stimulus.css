@@ -5,3 +5,11 @@
 .stimulus-slideshow .slide--show {
   display: block;
 }
+
+.stimulus-live-view {
+  border: none;
+}
+
+.stimulus-live-view--hide {
+  display: none;
+}
