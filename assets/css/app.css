@@ -1,4 +1,5 @@
 /* This file is for your main application css. */
 
+@import "./mealthy.css";
 @import "./phoenix.css";
 @import "./stimulus.css";

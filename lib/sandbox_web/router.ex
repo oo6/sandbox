@@ -13,6 +13,8 @@ defmodule SandboxWeb.Router do
     plug :accepts, ["json"]
   end
 
+  forward "/graphql", Absinthe.Plug, schema: SandboxWeb.Schema
+
   scope "/", SandboxWeb do
     pipe_through :browser
 
@@ -24,6 +26,11 @@ defmodule SandboxWeb.Router do
       get "/slideshow", StimulusController, :slideshow
       get "/content_loader", StimulusController, :content_loader
       get "/date_time", StimulusController, :date_time
+    end
+
+    scope "/mealthy", as: :mealthy do
+      get "/recipes", MealthyController, :list_recipes
+      get "/recipes/:id/edit", MealthyController, :edit_recipe
     end
   end
 

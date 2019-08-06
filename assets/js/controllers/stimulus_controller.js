@@ -65,7 +65,6 @@ export default class extends Controller {
   }
 
   greet() {
-    const name = this.nameTarget.value
     if (!this.name) return
 
     alert(`Hello, ${this.name}!`)

@@ -15,6 +15,6 @@ defmodule Sandbox.Mealthy.Recipe do
   def changeset(recipe, attrs) do
     recipe
     |> cast(attrs, [:title, :description])
-    |> validate_required([:title, :description])
+    |> validate_required([:title])
   end
 end

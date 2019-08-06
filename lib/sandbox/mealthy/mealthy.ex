@@ -10,4 +10,28 @@ defmodule Sandbox.Mealthy do
     |> RecipeSearch.run(opts[:q])
     |> Repo.all()
   end
+
+  def list_recipes() do
+    Repo.all(Recipe)
+  end
+
+  def get_recipe(id) do
+    Repo.get(Recipe, id)
+  end
+
+  def create_recipe(params) do
+    %Recipe{}
+    |> Recipe.changeset(params)
+    |> Repo.insert()
+  end
+
+  def update_recipe(recipe, params) do
+    recipe
+    |> Recipe.changeset(params)
+    |> Repo.update()
+  end
+
+  def delete_recipe(recipe) do
+    Repo.delete(recipe)
+  end
 end
