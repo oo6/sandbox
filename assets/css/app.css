@@ -1,5 +1,6 @@
 /* This file is for your main application css. */
 
+@import "./gomoku.css";
 @import "./mealthy.css";
 @import "./phoenix.css";
 @import "./stimulus.css";

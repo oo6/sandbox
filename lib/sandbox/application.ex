@@ -11,9 +11,10 @@ defmodule Sandbox.Application do
       # Start the Ecto repository
       Sandbox.Repo,
       # Start the endpoint when the application starts
-      SandboxWeb.Endpoint
+      SandboxWeb.Endpoint,
       # Starts a worker by calling: Sandbox.Worker.start_link(arg)
       # {Sandbox.Worker, arg},
+      {SandboxWeb.Live, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

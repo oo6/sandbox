@@ -34,6 +34,9 @@ defmodule SandboxWeb.Router do
       get "/recipes", MealthyController, :list_recipes
       get "/recipes/:id/edit", MealthyController, :edit_recipe
     end
+
+    live "/gomoku", GomokuLive
+    live "/gomoku/:id", GomokuLive
   end
 
   # Other scopes may use custom stacks.
