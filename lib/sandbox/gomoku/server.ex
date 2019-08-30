@@ -1,7 +1,6 @@
 defmodule Sandbox.Gomoku.Server do
   def start_link() do
-    {:ok, pid} =
-      Agent.start_link(fn -> %{state: nil, player: :black, places: %{}, players: %{}} end)
+    {:ok, pid} = Agent.start(fn -> %{state: nil, player: :black, places: %{}, players: %{}} end)
 
     Agent.update(pid, &Map.put(&1, :pid, pid))
 

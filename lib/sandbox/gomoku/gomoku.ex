@@ -61,8 +61,8 @@ defmodule Sandbox.Gomoku do
     %{gomoku | state: :playing}
   end
 
-  def stop(%{state: :playing} = gomoku), do: gomoku.id |> get_server() |> Server.stop()
-  def stop(_), do: :nothing
+  def stop(%{state: :watching}), do: :nothing
+  def stop(gomoku), do: gomoku.id |> get_server() |> Server.stop()
 
   def place(%{state: :stop} = gomoku, _), do: gomoku
   def place(%{id: nil} = gomoku, place), do: do_place(gomoku, place)

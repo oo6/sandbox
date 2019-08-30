@@ -23,7 +23,9 @@ defmodule SandboxWeb.GomokuLive do
   end
 
   def unmount(_, %{gomoku: gomoku}) do
-    Phoenix.PubSub.broadcast(Sandbox.PubSub, gomoku.id, :stop)
+    with :ok <- Gomoku.stop(gomoku) do
+      Phoenix.PubSub.broadcast_from!(Sandbox.PubSub, self(), gomoku.id, :stop)
+    end
   end
 
   def handle_params(%{"id" => _} = params, _, socket) do
@@ -77,9 +79,7 @@ defmodule SandboxWeb.GomokuLive do
   end
 
   def handle_info(:stop, socket) do
-    with :ok <- Gomoku.stop(socket.assigns.gomoku) do
-      {:noreply, live_redirect(socket, to: "/gomoku", replace: true)}
-    end
+    {:noreply, live_redirect(socket, to: "/gomoku", replace: true)}
   end
 
   defp win?(%{assigns: %{gomoku: %{state: :stop}}} = socket), do: {:stop, socket}

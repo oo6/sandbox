@@ -46,7 +46,7 @@ defmodule Sandbox.Mixfile do
       {:ex_machina, "~> 2.2", only: :test},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"}
+      {:phoenix_live_view, "~> 0.1"}
     ]
   end
 

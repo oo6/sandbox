@@ -6,8 +6,8 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "apollo-boost": "^0.4.3",
-    "graphql": "^14.4.2",
+    "apollo-boost": "^0.4.4",
+    "graphql": "^14.5.4",
     "graphql-tag": "^2.10.1",
     "loaders.css": "^0.1.2",
     "phoenix": "file:../deps/phoenix",
@@ -21,11 +21,11 @@
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.4",
-    "css-loader": "^3.1.0",
+    "css-loader": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   }
 }
