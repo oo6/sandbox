@@ -53,6 +53,16 @@ const DELETE_RECIPE_QUERY = gql`
 `
 
 export default class extends Controller {
+  qTarget: HTMLInputElement
+
+  loadingTarget: Element
+
+  wrapperTarget: Element
+
+  titleTarget: HTMLInputElement
+
+  descriptionTarget: HTMLInputElement
+
   static targets = ["q", "loading", "wrapper", "title", "description"]
 
   initialize() {
@@ -63,7 +73,7 @@ export default class extends Controller {
     if (!this.qTarget.value) return
 
     const $recipes = this.element.querySelector(".recipes")
-    $recipes.remove()
+    $recipes?.remove()
 
     this.loadingTarget.classList.remove("mealthy-loading--hide")
 
@@ -86,29 +96,30 @@ export default class extends Controller {
         this.descriptionTarget.value = ""
 
         let $row = this.element.querySelector(".row:last-child")
+        if ($row) {
+          if ($row.childElementCount == 2) {
+            $row = document.createElement("div")
+            $row.className = "row"
+          }
 
-        if ($row.childElementCount == 2) {
-          $row = document.createElement("div")
-          $row.className = "row"
+          $row.appendChild(this._template(create_recipe))
+
+          const $recipes = this.element.querySelector(".recipes")
+          $recipes?.appendChild($row)
         }
-
-        $row.appendChild(this._template(create_recipe))
-
-        const $recipes = this.element.querySelector(".recipes")
-        $recipes.appendChild($row)
       })
   }
 
-  update(event) {
+  update(event: Event) {
     client.mutate({mutation: UPDATE_RECIPE_QUERY, variables: {
-      id: event.target.dataset["id"],
+      id: (<HTMLButtonElement>event.target).dataset["id"],
       title: this.titleTarget.value,
       description: this.descriptionTarget.value
     }})
   }
 
-  delete() {
-    client.mutate({mutation: DELETE_RECIPE_QUERY, variables: {id: event.target.dataset["id"]}})
+  delete(event: Event) {
+    client.mutate({mutation: DELETE_RECIPE_QUERY, variables: {id: (<HTMLButtonElement>event.target).dataset["id"]}})
       .then(() => location.href = "/mealthy/recipes")
   }
 
@@ -121,7 +132,7 @@ export default class extends Controller {
       .catch(error => console.error(error))
   }
 
-  _insert(recipes) {
+  _insert(recipes: Recipe[]) {
     const $recipes = document.createElement("div")
     $recipes.className = "recipes"
 
@@ -137,7 +148,7 @@ export default class extends Controller {
     this.wrapperTarget.appendChild($recipes)
   }
 
-  _template(recipe) {
+  _template(recipe: Recipe): HTMLDivElement {
     const $recipe = document.createElement("div")
     $recipe.className = "column"
     $recipe.innerHTML = `

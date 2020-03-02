@@ -1,22 +1,33 @@
 import {Controller} from "stimulus"
 
 export default class extends Controller {
+  element: HTMLObjectElement
+
+  timer: number
+
+  nameTarget: HTMLInputElement
+
+  sourceTarget: HTMLInputElement
+
+  slideTargets: Element[]
+
   static targets = ["name", "source", "slide"]
 
-  get index() {
-    return +this.data.get("index")
+  get index(): number {
+    const index = this.data.get("index")
+    return index ? +index : 1
   }
 
-  set index(value) {
-    this.data.set("index", value)
+  set index(value: number) {
+    this.data.set("index", value.toString())
     this._show()
   }
 
-  get length() {
+  get length(): number {
     return this.slideTargets.length
   }
 
-  get name() {
+  get name(): string {
     return this.nameTarget.value
   }
 
@@ -45,7 +56,9 @@ export default class extends Controller {
   }
 
   _load() {
-    fetch(this.data.get("url"))
+    const url = this.data.get("url")
+
+    url && fetch(url)
       .then(response => response.text())
       .then(html => {
         this.element.innerHTML = html
@@ -54,12 +67,12 @@ export default class extends Controller {
 
   _start() {
     if (this.data.has("url")) {
-      this.timer = setInterval(() => this._load(), 1000)
+      this.timer = window.setInterval(() => this._load(), 1000)
     }
   }
 
   _stop() {
-    this.timer && clearInterval(this.timer)
+    this.timer && window.clearInterval(this.timer)
   }
 
   greet() {
@@ -84,12 +97,17 @@ export default class extends Controller {
   }
 
   adjust() {
-    const body = this.element.contentDocument.querySelector("body")
+    const $body = this.element.contentDocument?.querySelector("body")
 
-    body.style.margin = 0
-    body.querySelector("header").style.display = "none"
-    body.querySelector("main").style.padding = 0
+    if ($body) {
+      $body.style.margin = "0"
 
-    this.element.classList.remove("stimulus-live-view--hide")
+      const $header = $body.querySelector("header")
+      $header && ($header.style.display = "none")
+      const $main = $body.querySelector("main")
+      $main && ($main.style.padding = "0")
+
+      this.element.classList.remove("stimulus-live-view--hide")
+    }
   }
 }

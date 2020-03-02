@@ -1,7 +1,8 @@
 import {Controller} from "stimulus"
-import {LiveSocket} from "phoenix_live_view"
 
 export default class extends Controller {
+  sourceTarget: HTMLInputElement
+
   static targets = ["source"]
 
   copy() {
