@@ -8,17 +8,17 @@ defmodule SandboxWeb.GomokuLive do
     SandboxWeb.GomokuView.render("index.html", assigns)
   end
 
-  def mount(%{path_params: %{"id" => id}}, socket) do
+  def mount(%{"id" => id}, _session, socket) do
     server = Gomoku.get_server(id)
 
     if server do
       {:ok, socket}
     else
-      {:ok, live_redirect(socket, to: "/gomoku", replace: true)}
+      {:ok, push_redirect(socket, to: "/gomoku", replace: true)}
     end
   end
 
-  def mount(_, socket) do
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
@@ -55,10 +55,10 @@ defmodule SandboxWeb.GomokuLive do
     gomoku = Gomoku.start(socket.assigns.gomoku, "online")
     path = "/gomoku/#{URI.encode_www_form(gomoku.id)}"
 
-    {:noreply, live_redirect(socket, to: path, replace: true)}
+    {:noreply, push_patch(socket, to: path, replace: true)}
   end
 
-  def handle_event("place", place, socket) do
+  def handle_event("place", %{"place" => place}, socket) do
     gomoku = Gomoku.place(socket.assigns.gomoku, place)
 
     if gomoku.id do
@@ -79,9 +79,9 @@ defmodule SandboxWeb.GomokuLive do
   end
 
   def handle_info(:stop, socket) do
-    {:noreply, live_redirect(socket, to: "/gomoku", replace: true)}
+    {:noreply, push_patch(socket, to: "/gomoku", replace: true)}
   end
 
-  defp win?(%{assigns: %{gomoku: %{state: :stop}}} = socket), do: {:stop, socket}
+  defp win?(%{assigns: %{gomoku: %{state: :stop}}} = socket), do: {:noreply, socket}
   defp win?(socket), do: {:noreply, socket}
 end

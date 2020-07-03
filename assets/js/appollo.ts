@@ -1,3 +1,3 @@
-import ApolloClient from "apollo-boost"
+import ApolloClient from "apollo-boost";
 
-export default new ApolloClient()
+export default new ApolloClient();

@@ -9,7 +9,7 @@ defmodule SandboxWeb.GomokuLiveTest do
   end
 
   test "redirected mount", %{conn: conn} do
-    assert {:error, %{redirect: %{to: "/gomoku"}}} = live(conn, "/gomoku/invalid_id")
+    assert {:error, {:live_redirect, %{to: "/gomoku"}}} = live(conn, "/gomoku/invalid_id")
   end
 
   test "click start_local", %{view: view} do
@@ -24,7 +24,7 @@ defmodule SandboxWeb.GomokuLiveTest do
   test "click place", %{view: view} do
     render_click(view, "start_local")
 
-    assert render_click(view, "place", "0,0") =~
-             "<span phx-click=\"place\" phx-value=\"0,0\" class=\"piece black disabled\"></span>"
+    assert render_click(view, "place", %{"place" => "0,0"}) =~
+             "<span phx-click=\"place\" phx-value-place=\"0,0\" class=\"piece black disabled\"></span>"
   end
 end

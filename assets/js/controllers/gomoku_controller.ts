@@ -1,12 +1,12 @@
-import {Controller} from "stimulus"
+import { Controller } from "stimulus";
 
 export default class extends Controller {
-  sourceTarget: HTMLInputElement
+  sourceTarget: HTMLInputElement;
 
-  static targets = ["source"]
+  static targets = ["source"];
 
   copy() {
-    this.sourceTarget.select()
-    document.execCommand("copy")
+    this.sourceTarget.select();
+    document.execCommand("copy");
   }
 }

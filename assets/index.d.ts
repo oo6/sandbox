@@ -1,6 +1,7 @@
 declare module "phoenix_live_view" {
+  import type { Socket } from "phoenix";
   export default class LiveSocket {
-    constructor(path: string);
+    constructor(path: string, socket: typeof Socket, params: unknown);
 
     connect(): void;
   }
@@ -11,12 +12,12 @@ interface Window {
 }
 
 interface Tag {
-  name: string
+  name: string;
 }
 
 interface Recipe {
-  id: string
-  title: string
-  description: string | null
-  tags: Tag[]
+  id: string;
+  title: string;
+  description: string | null;
+  tags: Tag[];
 }

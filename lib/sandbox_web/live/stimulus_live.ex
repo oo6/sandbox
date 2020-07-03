@@ -1,5 +1,5 @@
 defmodule SandboxWeb.StimulusLive do
-  use Phoenix.LiveView
+  use SandboxWeb, :live_view
 
   def render(assigns) do
     ~L"""
@@ -8,7 +8,7 @@ defmodule SandboxWeb.StimulusLive do
     """
   end
 
-  def mount(_session, socket) do
+  def mount(_params, _session, socket) do
     Process.send_after(self(), :update, 1000)
 
     {:ok, assign(socket, live_view: DateTime.utc_now())}

@@ -1,113 +1,114 @@
-import {Controller} from "stimulus"
+import { Controller } from "stimulus";
 
 export default class extends Controller {
-  element: HTMLObjectElement
+  element: HTMLObjectElement;
 
-  timer: number
+  timer: number;
 
-  nameTarget: HTMLInputElement
+  nameTarget: HTMLInputElement;
 
-  sourceTarget: HTMLInputElement
+  sourceTarget: HTMLInputElement;
 
-  slideTargets: Element[]
+  slideTargets: Element[];
 
-  static targets = ["name", "source", "slide"]
+  static targets = ["name", "source", "slide"];
 
   get index(): number {
-    const index = this.data.get("index")
-    return index ? +index : 1
+    const index = this.data.get("index");
+    return index ? +index : 1;
   }
 
   set index(value: number) {
-    this.data.set("index", value.toString())
-    this._show()
+    this.data.set("index", value.toString());
+    this._show();
   }
 
   get length(): number {
-    return this.slideTargets.length
+    return this.slideTargets.length;
   }
 
   get name(): string {
-    return this.nameTarget.value
+    return this.nameTarget.value;
   }
 
   initialize() {
     if (location.pathname == "/stimulus/slideshow") {
-      this._show()
+      this._show();
     }
   }
 
   connect() {
     if (location.pathname == "/stimulus/content_loader_vs_live_view") {
-      this._start()
+      this._start();
     }
   }
 
   disconnect() {
     if (location.pathname == "/stimulus/content_loader_vs_live_view") {
-      this._stop()
+      this._stop();
     }
   }
 
   _show() {
     this.slideTargets.forEach((el, i) => {
-      el.classList.toggle("slide--show", this.index == i)
-    })
+      el.classList.toggle("slide--show", this.index == i);
+    });
   }
 
   _load() {
-    const url = this.data.get("url")
+    const url = this.data.get("url");
 
-    url && fetch(url)
-      .then(response => response.text())
-      .then(html => {
-        this.element.innerHTML = html
-      })
+    url &&
+      fetch(url)
+        .then((response) => response.text())
+        .then((html) => {
+          this.element.innerHTML = html;
+        });
   }
 
   _start() {
     if (this.data.has("url")) {
-      this.timer = window.setInterval(() => this._load(), 1000)
+      this.timer = window.setInterval(() => this._load(), 1000);
     }
   }
 
   _stop() {
-    this.timer && window.clearInterval(this.timer)
+    this.timer && window.clearInterval(this.timer);
   }
 
   greet() {
-    if (!this.name) return
+    if (!this.name) return;
 
-    alert(`Hello, ${this.name}!`)
+    alert(`Hello, ${this.name}!`);
   }
 
   copy() {
-    this.sourceTarget.select()
-    document.execCommand("copy")
+    this.sourceTarget.select();
+    document.execCommand("copy");
   }
 
   next() {
-    const index = this.index + 1
-    this.index = index == this.length ? 0 : index
+    const index = this.index + 1;
+    this.index = index == this.length ? 0 : index;
   }
 
   previous() {
-    const index = this.index - 1
-    this.index = index == -1 ? this.length - 1 : index
+    const index = this.index - 1;
+    this.index = index == -1 ? this.length - 1 : index;
   }
 
   adjust() {
-    const $body = this.element.contentDocument?.querySelector("body")
+    const $body = this.element.contentDocument?.querySelector("body");
 
     if ($body) {
-      $body.style.margin = "0"
+      $body.style.margin = "0";
 
-      const $header = $body.querySelector("header")
-      $header && ($header.style.display = "none")
-      const $main = $body.querySelector("main")
-      $main && ($main.style.padding = "0")
+      const $header = $body.querySelector("header");
+      $header && ($header.style.display = "none");
+      const $main = $body.querySelector("main");
+      $main && ($main.style.padding = "0");
 
-      this.element.classList.remove("stimulus-live-view--hide")
+      this.element.classList.remove("stimulus-live-view--hide");
     }
   }
 }

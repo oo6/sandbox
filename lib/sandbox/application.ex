@@ -6,15 +6,18 @@ defmodule Sandbox.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
       # Start the Ecto repository
       Sandbox.Repo,
-      # Start the endpoint when the application starts
+      # Start the Telemetry supervisor
+      SandboxWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Sandbox.PubSub},
+      # Start the Endpoint (http/https)
       SandboxWeb.Endpoint,
-      # Starts a worker by calling: Sandbox.Worker.start_link(arg)
-      # {Sandbox.Worker, arg},
-      {SandboxWeb.Live, []}
+      # Start a worker by calling: Sandbox.Worker.start_link(arg)
+      # {Sandbox.Worker, arg}
+      SandboxWeb.Live
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

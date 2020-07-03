@@ -29,7 +29,7 @@
 
       <div class="board">
         <%= for x <- 0..14, y <- 0..14 do %>
-          <span phx-click="place" phx-value="<%= "#{x},#{y}" %>" class="piece <%= @gomoku.places[{x, y}] %>"></span>
+          <span phx-click="place" phx-value-place="<%= "#{x},#{y}" %>" class="piece <%= @gomoku.places[{x, y}] %>"></span>
         <% end %>
       </div>
     <% end %>
