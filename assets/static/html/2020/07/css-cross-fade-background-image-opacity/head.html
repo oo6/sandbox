@@ -1,0 +1,43 @@
+<meta name="original-title" content="巧用 CSS cross-fade() 实现背景图像半透明效果" />
+<meta name="original-url"
+  content="https://www.zhangxinxu.com/wordpress/2020/07/css-cross-fade-background-image-opacity/" />
+
+<style>
+  .pseudo-class {
+    width: 320px;
+    height: 180px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    position: relative;
+    z-index: 0;
+  }
+
+  .pseudo-class::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: url(https://loremflickr.com/320/180);
+    z-index: -1;
+    opacity: .4;
+  }
+
+  .cross-fade {
+    width: 320px;
+    height: 180px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: url(https://loremflickr.com/320/180);
+    background-image: -webkit-cross-fade(url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==), url(https://loremflickr.com/320/180), 40%);
+    background-image: cross-fade(url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==), url(https://loremflickr.com/320/180), 40%);
+    background-size: 100% 100%;
+  }
+</style>

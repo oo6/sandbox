@@ -1,0 +1,13 @@
+<meta name="original-title" content="Github" />
+<meta name="original-url" content="https://github.com/oo6/sandbox" />
+
+<ul>
+  <%= for {year, items} <- archive do %>
+    <li><%= year %></li>
+    <ul>
+      <%= for item <- items do %>
+        <li><a href="<%= item.path %>"><%= item.title || item.path %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>

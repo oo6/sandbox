@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sandbox · Front End</title>
+    <link rel="stylesheet" href="/css/html.css" />
+
+    <%= if head, do: head %>
+  </head>
+  <body>
+    <header style="position: fixed; top: 0; z-index: 1">
+      <section class="container">
+        <nav role="navigation" style="width: 100%">
+          <ul>
+            <li>
+              <a id="original-url" target="_blank" style="overflow: hidden; text-overflow: ellipsis"></a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </header>
+
+    <main role="main" class="container" style="margin-top: 66px">
+      <%= if body, do: body %>
+    </div>
+
+    <script type="text/javascript" src="/js/html.js"></script>
+  </body>
+</html>

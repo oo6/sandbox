@@ -21,6 +21,8 @@ defmodule SandboxWeb.Router do
 
     get "/", PageController, :index
 
+    get "/html/*path", HTMLController, :show
+
     scope "/stimulus", as: :stimulus do
       get "/hello", StimulusController, :hello
       get "/clipboard", StimulusController, :clipboard
