@@ -1,8 +1,7 @@
 const path = require("path");
 const glob = require("glob");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, options) => {
@@ -10,10 +9,7 @@ module.exports = (env, options) => {
 
   return {
     optimization: {
-      minimizer: [
-        new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
-        new OptimizeCSSAssetsPlugin({}),
-      ],
+      minimizer: ["...", new CssMinimizerPlugin()],
     },
     entry: {
       app: glob.sync("./vendor/**/*.js").concat(["./js/app.ts"]),
@@ -39,7 +35,13 @@ module.exports = (env, options) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: { url: false },
+            },
+          ],
         },
       ],
     },

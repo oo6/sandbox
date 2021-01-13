@@ -1,8 +1,6 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  element: HTMLObjectElement;
-
   timer: number;
 
   nameTarget: HTMLInputElement;
@@ -95,20 +93,5 @@ export default class extends Controller {
   previous() {
     const index = this.index - 1;
     this.index = index == -1 ? this.length - 1 : index;
-  }
-
-  adjust() {
-    const $body = this.element.contentDocument?.querySelector("body");
-
-    if ($body) {
-      $body.style.margin = "0";
-
-      const $header = $body.querySelector("header");
-      $header && ($header.style.display = "none");
-      const $main = $body.querySelector("main");
-      $main && ($main.style.padding = "0");
-
-      this.element.classList.remove("stimulus-live-view--hide");
-    }
   }
 }

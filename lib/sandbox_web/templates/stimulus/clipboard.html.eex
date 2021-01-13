@@ -1,4 +1,4 @@
 <div data-controller="stimulus">
-  PIN: <input type="text" value="1234" data-target="stimulus.source" readonly>
+  PIN: <input type="text" value="1234" data-stimulus-target="source" readonly>
   <button data-action="stimulus#copy">Copy to Clipboard</button>
 </div>

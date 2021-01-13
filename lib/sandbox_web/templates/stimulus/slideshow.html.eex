@@ -2,8 +2,8 @@
   <button data-action="stimulus#previous">←</button>
   <button data-action="stimulus#next">→</button>
 
-  <div data-target="stimulus.slide" class="slide">🐵</div>
-  <div data-target="stimulus.slide" class="slide">🙈</div>
-  <div data-target="stimulus.slide" class="slide">🙉</div>
-  <div data-target="stimulus.slide" class="slide">🙊</div>
+  <div data-stimulus-target="slide" class="slide">🐵</div>
+  <div data-stimulus-target="slide" class="slide">🙈</div>
+  <div data-stimulus-target="slide" class="slide">🙉</div>
+  <div data-stimulus-target="slide" class="slide">🙊</div>
 </div>

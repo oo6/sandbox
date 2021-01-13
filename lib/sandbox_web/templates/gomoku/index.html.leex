@@ -14,7 +14,7 @@
       <%= if @gomoku.id do %>
         Invite <%= if @gomoku.state == :waiting, do: "play", else: "watch" %>
         :
-        <input type="text" value="<%= Routes.live_url(@socket, SandboxWeb.GomokuLive, @gomoku.id) %>" data-target="gomoku.source" readonly>
+        <input type="text" value="<%= Routes.live_url(@socket, SandboxWeb.GomokuLive, @gomoku.id) %>" data-gomoku-target="source" readonly>
         <button class="button-outline" data-action="gomoku#copy">Copy</button>
       <% end %>
     <% end %>

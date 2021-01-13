@@ -1,4 +1,4 @@
 <div data-controller="stimulus">
-  <input type="text" data-target="stimulus.name">
+  <input type="text" data-stimulus-target="name">
   <button data-action="stimulus#greet">Greet</button>
 </div>

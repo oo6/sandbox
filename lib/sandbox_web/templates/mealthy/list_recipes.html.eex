@@ -1,10 +1,10 @@
 <div id="recipes-controller" data-controller="mealthy">
-  <input type="text" data-target="mealthy.q" />
+  <input type="text" data-mealthy-target="q" />
   <button data-action="mealthy#search">Search</button>
 
   <hr />
 
-  <div class="mealthy-loading" data-target="mealthy.loading">
+  <div class="mealthy-loading" data-mealthy-target="loading">
     <div class="ball-pulse">
       <div></div>
       <div></div>
@@ -12,11 +12,11 @@
     </div>
   </div>
 
-  <div data-target="mealthy.wrapper"></div>
+  <div data-mealthy-target="wrapper"></div>
 
   <hr />
 
-  <input type="text" data-target="mealthy.title" placeholder="Title" />
-  <textarea data-target="mealthy.description" placeholder="Description"></textarea>
+  <input type="text" data-mealthy-target="title" placeholder="Title" />
+  <textarea data-mealthy-target=".description" placeholder="Description"></textarea>
   <button data-action="mealthy#create">Create</button>
 </div>
