@@ -17,7 +17,10 @@ defmodule Sandbox.Application do
       SandboxWeb.Endpoint,
       # Start a worker by calling: Sandbox.Worker.start_link(arg)
       # {Sandbox.Worker, arg}
-      SandboxWeb.Live
+      SandboxWeb.Live,
+      {Registry, name: Sandbox.BookStore.BookRegistry, keys: :unique},
+      Sandbox.BookStore.BookSupervisor,
+      Sandbox.BookStore.BookStateHydrator
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -42,9 +42,13 @@ defmodule SandboxWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", SandboxWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", SandboxWeb do
+    pipe_through :api
+
+    resources "/books", BookController, only: [:index, :show] do
+      post "/order", BookController, :order
+    end
+  end
 
   # Enables LiveDashboard only for development
   #
