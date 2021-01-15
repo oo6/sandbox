@@ -25,6 +25,6 @@ defmodule SandboxWeb.GomokuLiveTest do
     render_click(view, "start_local")
 
     assert render_click(view, "place", %{"place" => "0,0"}) =~
-             "<span phx-click=\"place\" phx-value-place=\"0,0\" class=\"piece black disabled\"></span>"
+             "<span phx-click=\"place\" phx-value-place=\"0,0\" class=\"gomoku-piece rounded-full cursor-not-allowed bg-black\"></span>"
   end
 end

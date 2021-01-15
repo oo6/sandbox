@@ -1,59 +1,12 @@
-.gomoku {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.gomoku.start {
-  flex-direction: row;
-}
-
-.gomoku.start button:first-child {
-  margin-right: 10px;
-}
-
-.gomoku .again {
-  cursor: pointer;
-}
-
-.gomoku .board {
+.gomoku-board {
   background-color: antiquewhite;
   background-image: url(/images/grid.svg);
   width: 70vh;
   height: 70vh;
-  display: flex;
-  flex-wrap: wrap;
   padding: 2%;
 }
 
-.gomoku .piece {
+.gomoku-piece {
   width: calc(100% / 15);
   height: calc(100% / 15);
-  border-radius: 50%;
-}
-
-.gomoku .piece.black {
-  background-color: black;
-}
-
-.gomoku .piece.white {
-  background-color: white;
-}
-
-.gomoku.playing .piece.disabled {
-  cursor: not-allowed;
-}
-
-.gomoku.playing.local[data-player="black"] .piece:not(.disabled):hover,
-.gomoku.playing.online[data-player="black"][data-color="black"] .piece:not(.disabled):hover {
-  background-color: black;
-  opacity: 0.6;
-}
-
-.gomoku.playing.local[data-player="white"] .piece:not(.disabled):hover,
-.gomoku.playing.online[data-player="white"][data-color="white"] .piece:not(.disabled):hover {
-  background-color: white;
-  opacity: 0.6;
 }

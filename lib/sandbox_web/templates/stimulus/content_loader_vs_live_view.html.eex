@@ -2,4 +2,4 @@
   content loader:
   <div data-controller="stimulus" data-stimulus-url="/stimulus/date_time"><p><%= @content_loader %></p></div>
 </div>
-<iframe class="stimulus-live-view" data-controller="stimulus" data-action="load->stimulus#adjust" src="/stimulus/live_view"></iframe>
+<iframe class="border-none" src="/stimulus/live_view"></iframe>

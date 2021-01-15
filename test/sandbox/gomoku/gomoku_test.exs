@@ -79,7 +79,7 @@ defmodule Sandbox.GomokuTest do
       assert %{
                id: nil,
                player: :white,
-               places: %{{0, 0} => "black disabled"}
+               places: %{{0, 0} => :black}
              } == Gomoku.place(gomoku, "0,0")
     end
 
@@ -90,7 +90,7 @@ defmodule Sandbox.GomokuTest do
       assert %{
                id: id,
                player: :white,
-               places: %{{0, 0} => "black disabled"},
+               places: %{{0, 0} => :black},
                color: :black,
                state: :playing
              } == Gomoku.place(gomoku, "0,0")
@@ -117,17 +117,17 @@ defmodule Sandbox.GomokuTest do
             id: nil,
             player: :black,
             places: %{
-              {0, 0} => "black disabled",
-              {1, 0} => "black disabled",
-              {2, 0} => "black disabled",
-              {3, 0} => "black disabled"
+              {0, 0} => :black,
+              {1, 0} => :black,
+              {2, 0} => :black,
+              {3, 0} => :black
             },
             state: :playing
           },
           "4,0"
         )
 
-      assert "black disabled" == gomoku.places[{4, 0}]
+      assert :black == gomoku.places[{4, 0}]
       assert :stop == gomoku.state
     end
   end

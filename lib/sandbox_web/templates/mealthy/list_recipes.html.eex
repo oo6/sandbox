@@ -4,12 +4,10 @@
 
   <hr />
 
-  <div class="mealthy-loading" data-mealthy-target="loading">
-    <div class="ball-pulse">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+  <div class="text-center" data-mealthy-target="loading">
+    <div class="animate-ball-pulse-0 bg-black w-6 h-6 rounded-full inline-block"></div>
+    <div class="animate-ball-pulse-1 bg-black w-6 h-6 rounded-full inline-block"></div>
+    <div class="animate-ball-pulse-2 bg-black w-6 h-6 rounded-full inline-block"></div>
   </div>
 
   <div data-mealthy-target="wrapper"></div>

@@ -81,7 +81,7 @@ defmodule Sandbox.Gomoku do
 
   defp do_place(gomoku, place) do
     [x, y] = place |> String.split(",") |> Enum.map(&String.to_integer/1)
-    places = Map.put_new(gomoku.places, {x, y}, "#{gomoku.player} disabled")
+    places = Map.put_new(gomoku.places, {x, y}, gomoku.player)
 
     if win?({x, y}, places) do
       %{gomoku | places: places, state: :stop}

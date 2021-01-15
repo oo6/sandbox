@@ -1,9 +1,11 @@
 /* This file is for your main application css. */
 
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
 @import "./gomoku.css";
-@import "./mealthy.css";
 @import "./phoenix.css";
-@import "./stimulus.css";
 
 /* Alerts and form errors */
 .alert {

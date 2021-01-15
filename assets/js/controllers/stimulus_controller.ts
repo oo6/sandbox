@@ -49,7 +49,7 @@ export default class extends Controller {
 
   _show() {
     this.slideTargets.forEach((el, i) => {
-      el.classList.toggle("slide--show", this.index == i);
+      el.classList.toggle("hidden", this.index != i);
     });
   }
 

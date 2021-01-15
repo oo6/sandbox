@@ -75,7 +75,7 @@ export default class extends Controller {
     const $recipes = this.element.querySelector(".recipes");
     $recipes?.remove();
 
-    this.loadingTarget.classList.remove("mealthy-loading--hide");
+    this.loadingTarget.classList.remove("hidden");
 
     client
       .query({
@@ -83,7 +83,7 @@ export default class extends Controller {
         variables: { q: this.qTarget.value },
       })
       .then(({ data: { search_recipes } }) => {
-        this.loadingTarget.classList.add("mealthy-loading--hide");
+        this.loadingTarget.classList.add("hidden");
         this._insert(search_recipes);
       });
   }
@@ -142,7 +142,7 @@ export default class extends Controller {
     client
       .query({ query: LIST_RECIPES_QUERY })
       .then(({ data: { recipes } }) => {
-        this.loadingTarget.classList.add("mealthy-loading--hide");
+        this.loadingTarget.classList.add("hidden");
         this._insert(recipes);
       })
       .catch((error) => console.error(error));
