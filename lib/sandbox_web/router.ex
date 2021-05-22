@@ -62,7 +62,10 @@ defmodule SandboxWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: SandboxWeb.Telemetry
+
+      live_dashboard "/dashboard",
+        metrics: SandboxWeb.Telemetry,
+        ecto_repos: Application.fetch_env!(:sandbox, :ecto_repos)
     end
   end
 end

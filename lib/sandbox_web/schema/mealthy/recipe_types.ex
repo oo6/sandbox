@@ -1,19 +1,16 @@
 defmodule SandboxWeb.Schema.Mealthy.RecipeTypes do
   use Absinthe.Schema.Notation
 
-  alias SandboxWeb.Schema.Helpers
   alias SandboxWeb.Mealthy.RecipeResolver
+
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
 
   object :recipe do
     field :id, :id
     field :title, :string
     field :description, :string
 
-    field :tags, list_of(:tag) do
-      resolve fn recipe, _, _ ->
-        batch({Helpers, :preload, :tags}, recipe, &{:ok, &1[recipe.id]})
-      end
-    end
+    field :tags, list_of(:tag), resolve: dataloader(Sandbox.Dataloader)
   end
 
   object :recipe_queries do

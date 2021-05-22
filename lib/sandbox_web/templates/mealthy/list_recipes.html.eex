@@ -15,6 +15,6 @@
   <hr />
 
   <input type="text" data-mealthy-target="title" placeholder="Title" />
-  <textarea data-mealthy-target=".description" placeholder="Description"></textarea>
+  <textarea data-mealthy-target="description" placeholder="Description"></textarea>
   <button data-action="mealthy#create">Create</button>
 </div>

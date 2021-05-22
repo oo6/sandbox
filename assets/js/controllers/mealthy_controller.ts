@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
+import { GraphQLClient, gql } from "graphql-request";
 import { Controller } from "stimulus";
 
-import client from "../appollo";
+const client = new GraphQLClient("/graphql");
 
 const fields = `
   id
@@ -37,7 +37,7 @@ const CREATE_RECIPE_QUERY = gql`
 `;
 
 const UPDATE_RECIPE_QUERY = gql`
-  mutation($id: ID!, $title: String!, $description: String) {
+  mutation ($id: ID!, $title: String!, $description: String) {
     update_recipe(id: $id, title: $title, description: $description) {
       id
     }
@@ -45,7 +45,7 @@ const UPDATE_RECIPE_QUERY = gql`
 `;
 
 const DELETE_RECIPE_QUERY = gql`
-  mutation($id: ID!) {
+  mutation ($id: ID!) {
     delete_recipe(id: $id) {
       id
     }
@@ -78,11 +78,8 @@ export default class extends Controller {
     this.loadingTarget.classList.remove("hidden");
 
     client
-      .query({
-        query: SEARCH_RECIPES_QUERY,
-        variables: { q: this.qTarget.value },
-      })
-      .then(({ data: { search_recipes } }) => {
+      .request(SEARCH_RECIPES_QUERY, { q: this.qTarget.value })
+      .then(({ search_recipes }) => {
         this.loadingTarget.classList.add("hidden");
         this._insert(search_recipes);
       });
@@ -92,14 +89,11 @@ export default class extends Controller {
     if (!this.titleTarget.value) return;
 
     client
-      .mutate({
-        mutation: CREATE_RECIPE_QUERY,
-        variables: {
-          title: this.titleTarget.value,
-          description: this.descriptionTarget.value,
-        },
+      .request(CREATE_RECIPE_QUERY, {
+        title: this.titleTarget.value,
+        description: this.descriptionTarget.value,
       })
-      .then(({ data: { create_recipe } }) => {
+      .then(({ create_recipe }) => {
         this.titleTarget.value = "";
         this.descriptionTarget.value = "";
 
@@ -119,29 +113,25 @@ export default class extends Controller {
   }
 
   update(event: Event) {
-    client.mutate({
-      mutation: UPDATE_RECIPE_QUERY,
-      variables: {
-        id: (<HTMLButtonElement>event.target).dataset["id"],
-        title: this.titleTarget.value,
-        description: this.descriptionTarget.value,
-      },
+    client.request(UPDATE_RECIPE_QUERY, {
+      id: (<HTMLButtonElement>event.target).dataset["id"],
+      title: this.titleTarget.value,
+      description: this.descriptionTarget.value,
     });
   }
 
   delete(event: Event) {
     client
-      .mutate({
-        mutation: DELETE_RECIPE_QUERY,
-        variables: { id: (<HTMLButtonElement>event.target).dataset["id"] },
+      .request(DELETE_RECIPE_QUERY, {
+        id: (<HTMLButtonElement>event.target).dataset["id"],
       })
       .then(() => (location.href = "/mealthy/recipes"));
   }
 
   _list() {
     client
-      .query({ query: LIST_RECIPES_QUERY })
-      .then(({ data: { recipes } }) => {
+      .request(LIST_RECIPES_QUERY)
+      .then(({ recipes }) => {
         this.loadingTarget.classList.add("hidden");
         this._insert(recipes);
       })

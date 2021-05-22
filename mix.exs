@@ -44,12 +44,14 @@ defmodule Sandbox.MixProject do
       {:phoenix_live_dashboard, "~> 0.2"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
+      {:ecto_psql_extras, "~> 0.2"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ex_machina, "~> 2.2", only: :test},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
+      {:dataloader, "~> 1.0.0"},
       {:httpoison, "~> 1.7"},
       {:money, "~> 1.7"}
     ]
