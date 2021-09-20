@@ -20,7 +20,8 @@ defmodule Sandbox.MixProject do
   def application do
     [
       mod: {Sandbox.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :os_mon],
+      start_phases: [after_start: []]
     ]
   end
 
@@ -51,9 +52,11 @@ defmodule Sandbox.MixProject do
       {:ex_machina, "~> 2.2", only: :test},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
-      {:dataloader, "~> 1.0.0"},
+      {:dataloader, "~> 1.0"},
       {:httpoison, "~> 1.7"},
-      {:money, "~> 1.7"}
+      {:money, "~> 1.7"},
+      {:libcluster, "~> 3.3"},
+      {:horde, "~> 0.8"}
     ]
   end
 
