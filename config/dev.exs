@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # Configure your database
 config :sandbox, Sandbox.Repo,
@@ -16,15 +16,15 @@ config :sandbox, Sandbox.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :sandbox, SandboxWeb.Endpoint,
-  http: [port: 4000],
-  debug_errors: true,
-  code_reloader: true,
+  # Binding to loopback ipv4 address prevents access from other machines.
+  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "rimJoCHkSxmzxX+2+3IGB5ssSRNHYoALqDcWQzzAWLgjOJoG/xA/8l2Z/P8PuTjl",
   watchers: [
-    yarn: [
-      "watch",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    yarn: ["watch", cd: Path.expand("../assets", __DIR__)]
   ]
 
 # ## SSL Support

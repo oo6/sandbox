@@ -82,12 +82,13 @@ defmodule SandboxWeb.GomokuLive do
   defp win?(socket), do: {:noreply, socket}
 
   def render(assigns) do
+    # TODO: do not define variables at the top of your render function
     class =
       "max-w-screen-2xl h-screen mx-auto flex items-center justify-center " <>
         if assigns.gomoku.state == :start, do: "flex-row", else: "flex-col"
 
-    ~L"""
-    <div class= "<%= class %>" data-controller="gomoku">
+    ~H"""
+    <div class={class} data-controller="gomoku">
       <%= render_by_state(@gomoku, @socket) %>
     </div>
     """
@@ -96,7 +97,7 @@ defmodule SandboxWeb.GomokuLive do
   defp render_by_state(%Gomoku{state: :start}, _) do
     assigns = %{}
 
-    ~L"""
+    ~H"""
     <button class="button-outline mr-4" phx-click="start_local">Local</button>
     <button class="button-outline" phx-click="start_online">Online</button>
     """
@@ -105,7 +106,7 @@ defmodule SandboxWeb.GomokuLive do
   defp render_by_state(%Gomoku{state: :stop} = gomoku, _) do
     assigns = %{gomoku: gomoku}
 
-    ~L"""
+    ~H"""
     <p>🎉 <%= @gomoku.player %> 🎉</p>
     <%= render_board(@gomoku) %>
     """
@@ -118,7 +119,7 @@ defmodule SandboxWeb.GomokuLive do
   defp render_by_state(gomoku, socket) do
     assigns = %{gomoku: gomoku, socket: socket}
 
-    ~L"""
+    ~H"""
     <%= if @gomoku.id do%>
       <%= render_invite(@gomoku.id, "watch", @socket) %>
     <% end %>
@@ -129,9 +130,9 @@ defmodule SandboxWeb.GomokuLive do
   defp render_invite(id, state, socket) do
     assigns = %{id: id, state: state, socket: socket}
 
-    ~L"""
+    ~H"""
     Invite <%= @state %>:
-    <input type="text" value="<%= Routes.live_url(@socket, __MODULE__, @id) %>" data-gomoku-target="source" readonly>
+    <input type="text" value={Routes.live_url(@socket, __MODULE__, @id)} data-gomoku-target="source" readonly>
     <button class="button-outline" data-action="gomoku#copy">Copy</button>
     """
   end
@@ -144,8 +145,10 @@ defmodule SandboxWeb.GomokuLive do
           "gomoku-piece rounded-full cursor-not-allowed #{bg_color}"
 
         !gomoku.id || gomoku.player == gomoku.color ->
-          bg_color = if gomoku.player == :black, do: "bg-black", else: "bg-white"
-          "gomoku-piece rounded-full hover\:opacity-60 hover\:#{bg_color}"
+          hover_bg_color =
+            if gomoku.player == :black, do: "hover:bg-black", else: "hover:bg-white"
+
+          "gomoku-piece rounded-full hover:opacity-80 #{hover_bg_color}"
 
         true ->
           ""
@@ -153,15 +156,15 @@ defmodule SandboxWeb.GomokuLive do
 
     assigns = %{place: "#{x},#{y}", class: class}
 
-    ~L"""
-    <span phx-click="place" phx-value-place="<%= @place %>" class="<%= @class %>"></span>
+    ~H"""
+    <span phx-click="place" phx-value-place={@place} class={@class}></span>
     """
   end
 
   defp render_board(gomoku) do
     assigns = %{gomoku: gomoku}
 
-    ~L"""
+    ~H"""
     Black
     <%= if @gomoku.color == :black, do: "👀" %>
     <%= if @gomoku.player == :black, do: "🤞" %>

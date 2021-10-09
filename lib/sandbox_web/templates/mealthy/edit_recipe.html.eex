@@ -1,7 +1,0 @@
-<div id="edit-recipe-controller" data-controller="mealthy">
-  <button class="alert-danger" data-action="mealthy#delete" data-id="<%= @recipe.id %>">Delete</button>
-
-  <input type="text" data-mealthy-target="title" placeholder="Title" value="<%= @recipe.title %>" />
-  <textarea data-mealthy-target="description" placeholder="Description"><%= @recipe.description %></textarea>
-  <button data-action="mealthy#update" data-id="<%= @recipe.id %>">Update</button>
-</div>

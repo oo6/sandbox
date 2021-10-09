@@ -1,11 +1,6 @@
 module.exports = {
   mode: "jit",
-  purge: [
-    "../lib/**/*.ex",
-    "../lib/**/*.leex",
-    "../lib/**/*.eex",
-    "./js/**/*.ts",
-  ],
+  purge: ["../lib/**/*.ex", "../lib/**/*.heex", "./js/**/*.ts"],
   darkMode: "media",
   theme: {
     extend: {

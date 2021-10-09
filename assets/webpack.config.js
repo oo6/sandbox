@@ -29,18 +29,13 @@ module.exports = (env, options) => {
         {
           test: /\.ts$/,
           exclude: /node_modules/,
-          use: {
-            loader: "ts-loader",
-          },
+          use: ["babel-loader", "ts-loader"],
         },
         {
           test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
-            {
-              loader: "css-loader",
-              options: { url: false },
-            },
+            { loader: "css-loader", options: { url: false } },
             "postcss-loader",
           ],
         },

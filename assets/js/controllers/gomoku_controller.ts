@@ -1,7 +1,7 @@
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  sourceTarget: HTMLInputElement;
+  declare readonly sourceTarget: HTMLInputElement;
 
   static targets = ["source"];
 

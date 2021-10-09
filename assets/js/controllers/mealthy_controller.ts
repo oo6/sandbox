@@ -1,37 +1,42 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 
 const client = new GraphQLClient("/graphql");
 
-const fields = `
-  id
-  title
-  description
-  tags {
-    name
+const fields = gql`
+  fragment RecipeFields on Recipe {
+    id
+    title
+    description
+    tags {
+      name
+    }
   }
 `;
 
 const LIST_RECIPES_QUERY = gql`
+  ${fields}
   query {
     recipes {
-      ${fields}
+      ...RecipeFields
     }
   }
 `;
 
 const SEARCH_RECIPES_QUERY = gql`
+  ${fields}
   query ($q: String!) {
-    search_recipes (q: $q) {
-      ${fields}
+    search_recipes(q: $q) {
+      ...RecipeFields
     }
   }
 `;
 
 const CREATE_RECIPE_QUERY = gql`
+  ${fields}
   mutation ($title: String!, $description: String) {
-    create_recipe (title: $title, description: $description) {
-      ${fields}
+    create_recipe(title: $title, description: $description) {
+      ...RecipeFields
     }
   }
 `;
@@ -53,15 +58,15 @@ const DELETE_RECIPE_QUERY = gql`
 `;
 
 export default class extends Controller {
-  qTarget: HTMLInputElement;
+  declare readonly qTarget: HTMLInputElement;
 
-  loadingTarget: Element;
+  declare readonly loadingTarget: Element;
 
-  wrapperTarget: Element;
+  declare readonly wrapperTarget: Element;
 
-  titleTarget: HTMLInputElement;
+  declare readonly titleTarget: HTMLInputElement;
 
-  descriptionTarget: HTMLInputElement;
+  declare readonly descriptionTarget: HTMLInputElement;
 
   static targets = ["q", "loading", "wrapper", "title", "description"];
 

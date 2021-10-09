@@ -12,6 +12,7 @@ defmodule Sandbox.Application do
     HordeNodeObserver
   }
 
+  @impl true
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
@@ -47,11 +48,13 @@ defmodule Sandbox.Application do
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
+  @impl true
   def config_change(changed, _new, removed) do
     SandboxWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 
+  @impl true
   def start_phase(:after_start, _, _) do
     HordeSupervisor.start_server(timeout: :timer.seconds(2))
     :ok

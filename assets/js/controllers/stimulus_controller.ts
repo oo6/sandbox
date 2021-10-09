@@ -1,13 +1,13 @@
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   timer: number;
 
-  nameTarget: HTMLInputElement;
+  declare readonly nameTarget: HTMLInputElement;
 
-  sourceTarget: HTMLInputElement;
+  declare readonly sourceTarget: HTMLInputElement;
 
-  slideTargets: Element[];
+  declare readonly slideTargets: Element[];
 
   static targets = ["name", "source", "slide"];
 
@@ -82,7 +82,7 @@ export default class extends Controller {
 
   copy() {
     this.sourceTarget.select();
-    document.execCommand("copy");
+    navigator.clipboard.writeText(this.sourceTarget.value);
   }
 
   next() {

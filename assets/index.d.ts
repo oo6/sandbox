@@ -1,6 +1,6 @@
 declare module "phoenix_live_view" {
   import type { Socket } from "phoenix";
-  export default class LiveSocket {
+  export class LiveSocket {
     constructor(path: string, socket: typeof Socket, params: unknown);
 
     connect(): void;

@@ -1,11 +1,11 @@
 # This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
+# and its dependencies with the aid of the Config module.
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :sandbox,
   ecto_repos: [Sandbox.Repo]
@@ -13,7 +13,6 @@ config :sandbox,
 # Configures the endpoint
 config :sandbox, SandboxWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "rimJoCHkSxmzxX+2+3IGB5ssSRNHYoALqDcWQzzAWLgjOJoG/xA/8l2Z/P8PuTjl",
   render_errors: [view: SandboxWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Sandbox.PubSub,
   live_view: [signing_salt: "+8pG0vP2"]
@@ -28,4 +27,4 @@ config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+import_config "#{config_env()}.exs"

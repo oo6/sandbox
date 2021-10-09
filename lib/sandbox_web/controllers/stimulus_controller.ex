@@ -18,6 +18,7 @@ defmodule SandboxWeb.StimulusController do
   end
 
   def date_time(conn, _params) do
-    html(conn, "<p>#{DateTime.utc_now()}</p>")
+    now = DateTime.utc_now() |> DateTime.to_string()
+    html(conn, "<p>#{now}</p>")
   end
 end
