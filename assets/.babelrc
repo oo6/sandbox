@@ -1,8 +1,13 @@
 {
   "presets": [
-    "@babel/preset-env"
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties"
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3,
+        "targets": ["defaults", "not IE 11"]
+      }
+    ],
+    ["@babel/preset-typescript", { "allowDeclareFields": true }]
   ]
 }

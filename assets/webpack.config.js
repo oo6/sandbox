@@ -20,7 +20,7 @@ module.exports = (env, options) => {
       path: path.resolve(__dirname, "../priv/static/js"),
       publicPath: "/js/",
     },
-    devtool: devMode ? "source-map" : undefined,
+    devtool: devMode ? "eval-cheap-module-source-map" : undefined,
     resolve: {
       extensions: [".ts", ".js"],
     },
@@ -29,7 +29,10 @@ module.exports = (env, options) => {
         {
           test: /\.ts$/,
           exclude: /node_modules/,
-          use: ["babel-loader", "ts-loader"],
+          use: {
+            loader: "babel-loader",
+            options: { cacheDirectory: true },
+          },
         },
         {
           test: /\.css$/,

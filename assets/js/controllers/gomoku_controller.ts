@@ -5,8 +5,8 @@ export default class extends Controller {
 
   static targets = ["source"];
 
-  copy() {
+  copy(): void {
     this.sourceTarget.select();
-    document.execCommand("copy");
+    navigator.clipboard.writeText(this.sourceTarget.value);
   }
 }

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  timer: number;
+  timer?: number;
 
   declare readonly nameTarget: HTMLInputElement;
 
@@ -18,7 +18,7 @@ export default class extends Controller {
 
   set index(value: number) {
     this.data.set("index", value.toString());
-    this._show();
+    this.#show();
   }
 
   get length(): number {
@@ -29,31 +29,31 @@ export default class extends Controller {
     return this.nameTarget.value;
   }
 
-  initialize() {
+  initialize(): void {
     if (location.pathname == "/stimulus/slideshow") {
-      this._show();
+      this.#show();
     }
   }
 
-  connect() {
+  connect(): void {
     if (location.pathname == "/stimulus/content_loader_vs_live_view") {
-      this._start();
+      this.#start();
     }
   }
 
-  disconnect() {
+  disconnect(): void {
     if (location.pathname == "/stimulus/content_loader_vs_live_view") {
-      this._stop();
+      this.#stop();
     }
   }
 
-  _show() {
+  #show(): void {
     this.slideTargets.forEach((el, i) => {
       el.classList.toggle("hidden", this.index != i);
     });
   }
 
-  _load() {
+  #load(): void {
     const url = this.data.get("url");
 
     url &&
@@ -64,33 +64,33 @@ export default class extends Controller {
         });
   }
 
-  _start() {
+  #start(): void {
     if (this.data.has("url")) {
-      this.timer = window.setInterval(() => this._load(), 1000);
+      this.timer = window.setInterval(() => this.#load(), 1000);
     }
   }
 
-  _stop() {
-    this.timer && window.clearInterval(this.timer);
+  #stop(): void {
+    window.clearInterval(this.timer);
   }
 
-  greet() {
+  greet(): void {
     if (!this.name) return;
 
     alert(`Hello, ${this.name}!`);
   }
 
-  copy() {
+  copy(): void {
     this.sourceTarget.select();
     navigator.clipboard.writeText(this.sourceTarget.value);
   }
 
-  next() {
+  next(): void {
     const index = this.index + 1;
     this.index = index == this.length ? 0 : index;
   }
 
-  previous() {
+  previous(): void {
     const index = this.index - 1;
     this.index = index == -1 ? this.length - 1 : index;
   }

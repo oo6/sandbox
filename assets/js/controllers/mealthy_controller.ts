@@ -70,11 +70,11 @@ export default class extends Controller {
 
   static targets = ["q", "loading", "wrapper", "title", "description"];
 
-  initialize() {
-    this.element.id == "recipes-controller" && this._list();
+  initialize(): void {
+    this.element.id == "recipes-controller" && this.#list();
   }
 
-  search() {
+  search(): void {
     if (!this.qTarget.value) return;
 
     const $recipes = this.element.querySelector(".recipes");
@@ -86,11 +86,11 @@ export default class extends Controller {
       .request(SEARCH_RECIPES_QUERY, { q: this.qTarget.value })
       .then(({ search_recipes }) => {
         this.loadingTarget.classList.add("hidden");
-        this._insert(search_recipes);
+        this.#insert(search_recipes);
       });
   }
 
-  create() {
+  create(): void {
     if (!this.titleTarget.value) return;
 
     client
@@ -109,7 +109,7 @@ export default class extends Controller {
             $row.className = "row";
           }
 
-          $row.appendChild(this._template(create_recipe));
+          $row.appendChild(this.#template(create_recipe));
 
           const $recipes = this.element.querySelector(".recipes");
           $recipes?.appendChild($row);
@@ -117,7 +117,7 @@ export default class extends Controller {
       });
   }
 
-  update(event: Event) {
+  update(event: Event): void {
     client.request(UPDATE_RECIPE_QUERY, {
       id: (<HTMLButtonElement>event.target).dataset["id"],
       title: this.titleTarget.value,
@@ -125,7 +125,7 @@ export default class extends Controller {
     });
   }
 
-  delete(event: Event) {
+  delete(event: Event): void {
     client
       .request(DELETE_RECIPE_QUERY, {
         id: (<HTMLButtonElement>event.target).dataset["id"],
@@ -133,25 +133,22 @@ export default class extends Controller {
       .then(() => (location.href = "/mealthy/recipes"));
   }
 
-  _list() {
-    client
-      .request(LIST_RECIPES_QUERY)
-      .then(({ recipes }) => {
-        this.loadingTarget.classList.add("hidden");
-        this._insert(recipes);
-      })
-      .catch((error) => console.error(error));
+  #list(): void {
+    client.request(LIST_RECIPES_QUERY).then(({ recipes }) => {
+      this.loadingTarget.classList.add("hidden");
+      this.#insert(recipes);
+    });
   }
 
-  _insert(recipes: Recipe[]) {
+  #insert(recipes: Recipe[]): void {
     const $recipes = document.createElement("div");
     $recipes.className = "recipes";
 
     for (let i = 0; i < recipes.length; i = i + 2) {
       const $row = document.createElement("div");
       $row.className = "row";
-      $row.appendChild(this._template(recipes[i]));
-      recipes[i + 1] && $row.appendChild(this._template(recipes[i + 1]));
+      $row.appendChild(this.#template(recipes[i]));
+      recipes[i + 1] && $row.appendChild(this.#template(recipes[i + 1]));
 
       $recipes.appendChild($row);
     }
@@ -159,7 +156,7 @@ export default class extends Controller {
     this.wrapperTarget.appendChild($recipes);
   }
 
-  _template(recipe: Recipe): HTMLDivElement {
+  #template(recipe: Recipe): HTMLDivElement {
     const $recipe = document.createElement("div");
     $recipe.className = "column";
     $recipe.innerHTML = `
