@@ -1,7 +1,8 @@
 module.exports = {
-  mode: "jit",
-  purge: ["../lib/**/*.ex", "../lib/**/*.heex", "./js/**/*.ts"],
-  darkMode: "media",
+  content: ["../lib/**/*.ex", "../lib/**/*.heex", "./js/**/*.ts"],
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     extend: {
       // https://github.com/ConnorAtherton/loaders.css/blob/dee8aabed3adbfb121b931a42e3ebc233fafdd68/loaders.css#L9-L52
