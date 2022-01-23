@@ -57,7 +57,8 @@ defmodule Sandbox.MixProject do
       {:httpoison, "~> 1.7"},
       {:money, "~> 1.7"},
       {:libcluster, "~> 3.3"},
-      {:horde, "~> 0.8"}
+      {:horde, "~> 0.8"},
+      {:stream_data, "~> 0.5", only: [:dev, :test]}
     ]
   end
 
