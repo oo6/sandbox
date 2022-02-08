@@ -17,6 +17,7 @@ defmodule Sandbox.Application do
     children = [
       # Start the Ecto repository
       Sandbox.Repo,
+      Sandbox.RecipeListener,
       # Start the Telemetry supervisor
       SandboxWeb.Telemetry,
       # Start the PubSub system
