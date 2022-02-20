@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package sandbox.mealthy;
+
+service Recipe {
+  rpc Create (CreateRecipeRequest) returns (RecipeReply) {}
+  rpc Get (GetRecipeRequest) returns (RecipeReply) {}
+}
+
+message RecipeReply {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+}
+
+message CreateRecipeRequest {
+  string title = 1;
+  string description = 2;
+}
+
+message GetRecipeRequest {
+  int32 id = 1;
+}

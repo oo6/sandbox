@@ -38,7 +38,8 @@ defmodule Sandbox.Application do
       {GlobalSupervisor, [timeout: :timer.seconds(2)]},
       HordeRegistry,
       HordeSupervisor,
-      HordeNodeObserver
+      HordeNodeObserver,
+      {GRPC.Server.Supervisor, {Sandbox.Mealthy.Endpoint, 50051}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

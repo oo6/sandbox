@@ -58,7 +58,9 @@ defmodule Sandbox.MixProject do
       {:money, "~> 1.7"},
       {:libcluster, "~> 3.3"},
       {:horde, "~> 0.8"},
-      {:stream_data, "~> 0.5", only: [:dev, :test]}
+      {:stream_data, "~> 0.5", only: [:dev, :test]},
+      {:grpc, github: "elixir-grpc/grpc"},
+      {:cowlib, "~> 2.11", override: true}
     ]
   end
 
