@@ -43,9 +43,9 @@ defmodule Sandbox.MixProject do
       {:phoenix_live_view, "~> 0.16"},
       {:floki, ">= 0.30.0"},
       {:phoenix_live_dashboard, "~> 0.5"},
-      {:telemetry, "~> 1.0", override: true},
-      {:telemetry_metrics, "~> 0.6", override: true},
-      {:telemetry_poller, "~> 1.0", override: true},
+      {:telemetry, "~> 1.0"},
+      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_poller, "~> 1.0"},
       {:ecto_psql_extras, "~> 0.2"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
@@ -74,7 +74,8 @@ defmodule Sandbox.MixProject do
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test", "cmd cd assets && yarn test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test", "cmd cd assets && yarn test"],
+      "assets.deploy": ["cmd cd assets && yarn deploy", "phx.digest"]
     ]
   end
 end
