@@ -65,6 +65,14 @@ config :sandbox, SandboxWeb.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
+config :logger, backends: [{LoggerFileBackend, :request_log}]
+
+config :logger, :request_log,
+  format: "[$level] $message\n",
+  path: Path.expand("../log/request_log", __DIR__),
+  level: :info,
+  metadata_filter: [application: :tesla]
+
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20

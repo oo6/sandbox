@@ -54,13 +54,15 @@ defmodule Sandbox.MixProject do
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
       {:dataloader, "~> 1.0"},
-      {:httpoison, "~> 1.7"},
+      {:tesla, "~> 1.4"},
+      {:logger_file_backend, "~> 0.0.13"},
       {:money, "~> 1.7"},
       {:libcluster, "~> 3.3"},
       {:horde, "~> 0.8"},
       {:stream_data, "~> 0.5", only: [:dev, :test]},
       {:grpc, github: "elixir-grpc/grpc"},
-      {:cowlib, "~> 2.11", override: true}
+      {:cowlib, "~> 2.11", override: true},
+      {:gun, github: "elixir-grpc/gun", override: true}
     ]
   end
 

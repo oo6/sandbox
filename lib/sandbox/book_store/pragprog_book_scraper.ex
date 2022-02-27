@@ -1,19 +1,25 @@
 defmodule Sandbox.BookStore.PragprogBookScraper do
+  use Tesla, only: [:get], docs: false
+
+  plug Tesla.Middleware.BaseUrl, "https://pragprog.com"
+  plug Tesla.Middleware.Logger, debug: false
+
   alias Sandbox.BookStore
 
-  @host "https://pragprog.com"
-
   def run(path \\ "/titles/") do
-    body = path |> get_page()
-    body |> get_books() |> BookStore.create_books()
-
-    if path = get_next_page_path(body) do
-      run(path)
+    path
+    |> get_page()
+    |> get_books()
+    |> BookStore.create_books()
+    |> get_next_page_path()
+    |> case do
+      nil -> nil
+      path -> run(path)
     end
   end
 
   def get_page(path) do
-    %{body: body} = HTTPoison.get!(@host <> path)
+    %{body: body} = get!(path)
     Floki.parse_document!(body)
   end
 
