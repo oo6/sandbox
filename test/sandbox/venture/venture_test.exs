@@ -4,6 +4,7 @@ defmodule Sandbox.VentureTest do
   import Sandbox.VentureFactory
 
   alias Sandbox.Venture
+  alias Sandbox.Venture.NPC
 
   describe "list npcs" do
     test "" do
@@ -14,7 +15,7 @@ defmodule Sandbox.VentureTest do
       npcs = insert_list(5, :npc, level: 5)
       insert(:npc)
 
-      filter = [{:level_from, 4}, {:level_to, 6}]
+      filter = [{:level, :gte, 4}, {:level, :lte, 6}]
       assert npcs == Venture.list_npcs(filter: filter)
     end
 
@@ -22,7 +23,7 @@ defmodule Sandbox.VentureTest do
       npcs = insert_list(5, :npc, tags: ["junior"])
       insert(:npc)
 
-      assert npcs == Venture.list_npcs(filter: [{:tag, "junior"}])
+      assert npcs == Venture.list_npcs(filter: [{:tag, &NPC.filter_by/3, "junior"}])
     end
   end
 end

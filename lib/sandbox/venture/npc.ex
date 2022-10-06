@@ -15,19 +15,9 @@ defmodule Sandbox.Venture.NPC do
   end
 
   @impl Filter
-  def filter_by_attr({:level_from, level}, query) do
-    query |> where([n], n.level >= ^level)
-  end
-
-  def filter_by_attr({:level_to, level}, query) do
-    query |> where([n], n.level <= ^level)
-  end
-
-  def filter_by_attr({:tag, value}, query) do
+  def filter_by(query, :tag, value) do
     query |> where([n], fragment("? @> ?::varchar[]", n.tags, [^value]))
   end
-
-  def filter_by_attr(_, query), do: query
 
   def changeset(npc, attrs) do
     npc

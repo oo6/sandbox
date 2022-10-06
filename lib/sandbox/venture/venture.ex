@@ -8,7 +8,7 @@ defmodule Sandbox.Venture do
     opts = Enum.into(opts, %{})
 
     NPC
-    |> Filter.apply(opts[:filter], NPC)
+    |> Filter.apply(opts[:filter])
     |> Repo.all()
   end
 end
