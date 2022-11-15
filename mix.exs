@@ -60,9 +60,9 @@ defmodule Sandbox.MixProject do
       {:libcluster, "~> 3.3"},
       {:horde, "~> 0.8"},
       {:stream_data, "~> 0.5", only: [:dev, :test]},
-      {:grpc, github: "elixir-grpc/grpc"},
-      {:cowlib, "~> 2.11", override: true},
-      {:gun, github: "elixir-grpc/gun", override: true}
+      {:grpc, "~> 0.5"},
+      {:protobuf, "~> 0.11"},
+      {:gun, "~> 2.0.1", hex: :grpc_gun, override: true}
     ]
   end
 

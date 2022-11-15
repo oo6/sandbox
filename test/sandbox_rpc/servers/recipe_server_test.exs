@@ -1,4 +1,4 @@
-defmodule Sandbox.Mealthy.EndpointTest do
+defmodule SandboxRPC.RecipeServerTest do
   use Sandbox.DataCase
 
   import Sandbox.MealthyFactory

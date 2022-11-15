@@ -39,7 +39,7 @@ defmodule Sandbox.Application do
       HordeRegistry,
       HordeSupervisor,
       HordeNodeObserver,
-      {GRPC.Server.Supervisor, {Sandbox.Mealthy.Endpoint, 50051}}
+      {GRPC.Server.Supervisor, {SandboxRPC.Endpoint, 50051}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
