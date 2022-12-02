@@ -1,0 +1,18 @@
+<h1>New Image</h1>
+
+<div data-controller="image">
+  <img data-image-target="image" hidden>
+
+  <.form let={f} for={@changeset} action={Routes.image_path(@conn, :create)} multipart={true} data-image-target="form">
+    <%= file_input f, :file, "data-image-target": "file", "data-action": "change->image#change" %>
+
+    <%= hidden_input f, :x, "data-image-target": "x" %>
+    <%= hidden_input f, :y, "data-image-target": "y" %>
+    <%= hidden_input f, :width, "data-image-target": "width" %>
+    <%= hidden_input f, :height, "data-image-target": "height" %>
+
+    <div>
+      <%= submit "Upload" %>
+    </div>
+  </.form>
+</div>

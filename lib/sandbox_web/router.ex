@@ -39,6 +39,8 @@ defmodule SandboxWeb.Router do
 
     live "/gomoku", GomokuLive
     live "/gomoku/:id", GomokuLive
+
+    resources "/images", ImageController
   end
 
   # Other scopes may use custom stacks.
