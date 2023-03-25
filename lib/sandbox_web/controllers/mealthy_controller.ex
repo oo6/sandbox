@@ -8,7 +8,7 @@ defmodule SandboxWeb.MealthyController do
   end
 
   def edit_recipe(conn, %{"id" => id}) do
-    recipe = Mealthy.get_recipe(id)
+    recipe = Mealthy.get_recipe!(id)
     render(conn, "edit_recipe.html", recipe: recipe)
   end
 end

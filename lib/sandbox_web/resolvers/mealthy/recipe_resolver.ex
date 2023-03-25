@@ -6,7 +6,7 @@ defmodule SandboxWeb.Mealthy.RecipeResolver do
   end
 
   def get(_parent, %{id: id}, _resolution) do
-    {:ok, Mealthy.get_recipe(id)}
+    {:ok, Mealthy.get_recipe!(id)}
   end
 
   def create(_parent, args, _resolution) do
@@ -15,13 +15,13 @@ defmodule SandboxWeb.Mealthy.RecipeResolver do
 
   def update(_parent, %{id: id} = args, _resolution) do
     id
-    |> Mealthy.get_recipe()
+    |> Mealthy.get_recipe!()
     |> Mealthy.update_recipe(args)
   end
 
   def delete(_parent, %{id: id}, _resolution) do
     id
-    |> Mealthy.get_recipe()
+    |> Mealthy.get_recipe!()
     |> Mealthy.delete_recipe()
   end
 

@@ -24,7 +24,7 @@ defmodule SandboxRPC.RecipeServerTest do
 
     test "not found", %{channel: channel} do
       request = GetRecipeRequest.new(id: 0)
-      assert {:error, %GRPC.RPCError{}} = Recipe.Stub.get(channel, request)
+      assert {:error, %GRPC.RPCError{status: 5}} = Recipe.Stub.get(channel, request)
     end
   end
 end

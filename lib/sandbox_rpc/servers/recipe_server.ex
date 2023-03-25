@@ -10,13 +10,7 @@ defmodule SandboxRPC.RecipeServer do
   end
 
   def get(%{id: id}, stream) do
-    recipe = Mealthy.get_recipe(id)
-
-    if recipe do
-      render(stream, recipe)
-    else
-      # TODO: Try the phoniex fallback controller idea
-      raise GRPC.RPCError, status: :not_found
-    end
+    recipe = Mealthy.get_recipe!(id)
+    render(stream, recipe)
   end
 end
