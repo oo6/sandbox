@@ -15,7 +15,7 @@ defmodule SandboxWeb.ImageController do
     if changeset.valid? do
       %{file: %{path: path}, x: x, y: y, width: width, height: height} = changeset.changes
 
-      {:ok, image} =
+      image =
         path
         |> File.read!()
         |> SnippyCrab.crop_and_grayscale(x, y, width, height)

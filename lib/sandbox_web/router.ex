@@ -67,7 +67,7 @@ defmodule SandboxWeb.Router do
 
       live_dashboard "/dashboard",
         metrics: SandboxWeb.Telemetry,
-        ecto_repos: Application.fetch_env!(:sandbox, :ecto_repos)
+        ecto_repos: Application.compile_env!(:sandbox, :ecto_repos)
     end
   end
 end

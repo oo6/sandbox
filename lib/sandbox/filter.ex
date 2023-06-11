@@ -1,5 +1,5 @@
 defmodule Sandbox.Filter do
-  @callback filter_by(query :: Ecto.Query.t(), field :: String.t(), value :: String.t()) ::
+  @callback filter_by(query :: Ecto.Query.t(), field :: atom(), value :: String.t()) ::
               Ecto.Query.t()
 
   import Ecto.Query

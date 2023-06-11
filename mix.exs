@@ -63,7 +63,8 @@ defmodule Sandbox.MixProject do
       {:grpc, "~> 0.5"},
       {:protobuf, "~> 0.11"},
       {:gun, "~> 2.0.1", hex: :grpc_gun, override: true},
-      {:rustler, "~> 0.26"}
+      {:rustler, "~> 0.26"},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 

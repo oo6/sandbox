@@ -3,7 +3,7 @@ defmodule GRPCEcto.Server.Interceptor do
     @spec status(t) :: GRPC.Status.t()
     def status(exception)
 
-    @spec status(t) :: String.t()
+    @spec message(t) :: String.t()
     def message(exception)
   end
 end

@@ -7,14 +7,11 @@ defmodule Sandbox.BookStore.PragprogBookScraper do
   alias Sandbox.BookStore
 
   def run(path \\ "/titles/") do
-    path
-    |> get_page()
-    |> get_books()
-    |> BookStore.create_books()
-    |> get_next_page_path()
-    |> case do
-      nil -> nil
-      path -> run(path)
+    body = get_page(path)
+    body |> get_books() |> BookStore.create_books()
+
+    if path = get_next_page_path(body) do
+      run(path)
     end
   end
 
