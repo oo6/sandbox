@@ -4,15 +4,24 @@ defmodule Sandbox.BookStore do
   alias Sandbox.BookStore.{Book, BookSupervisor}
 
   def create_books(params) do
-    time = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
-
     params =
       Enum.map(
         params,
-        &[{:quantity, &1[:price] && 500}, {:inserted_at, time}, {:updated_at, time} | &1]
+        &[
+          {:quantity, &1[:price] && 500},
+          {:inserted_at, {:placeholder, :now}},
+          {:updated_at, {:placeholder, :now}} | &1
+        ]
       )
 
-    Repo.insert_all(Book, params, on_conflict: :replace_all, conflict_target: :title)
+    Repo.insert_all(Book, params,
+      placeholders: %{now: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)},
+      on_conflict: :replace_all,
+      conflict_target: :title,
+      # When the :on_conflict option is specified, Postgres and MySQL will return different results.
+      # https://hexdocs.pm/ecto/3.10.3/Ecto.Repo.html#c:insert_all/3-return-values
+      returning: true
+    )
   end
 
   def actor_list_books() do
